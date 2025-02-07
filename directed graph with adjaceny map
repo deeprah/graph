@@ -1,0 +1,61 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<list<pair<int,int>> >graph;
+int v;
+void addedge(int src ,int dest,int wt,bool bi=true)
+{
+    graph[src].push_back({dest,wt});
+    if(bi)
+    {
+        graph[dest].push_back({src,wt});
+    }
+}
+void display()
+{
+    for(int i=0;i<graph.size();i++)
+    {
+        cout<<i<<"->";
+        for(auto el:graph[i])
+        {
+            cout<<"("<<el.first<<","<<el.second<<")"<<",";
+        }
+        cout<<endl;
+    }
+}
+
+int main() {
+    cout<<"vertex: ";
+     cin>>v;
+    graph.resize(v,list<pair<int,int>>());
+    int e;
+    cout<<"edge ";
+    cin>>e;
+    while(e--)
+    {
+        int s,d,wt;
+        cout<<"enter value of s and d :";
+        cin>>s>>d>>wt;
+        addedge(s,d,wt,false);
+    }
+    display();
+
+    return 0;
+}vertex: 7
+edge 7
+enter value of s and d :0 2 2
+enter value of s and d :0 1 1
+enter value of s and d :1 5 3
+enter value of s and d :5 2 2
+enter value of s and d :3 2 6
+enter value of s and d :6 3 2
+enter value of s and d :6 4 9
+0->(2,2),(1,1),
+1->(5,3),
+2->
+3->(2,6),
+4->
+5->(2,2),
+6->(3,2),(4,9),
+
