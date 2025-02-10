@@ -1,0 +1,58 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+using namespace std;
+ vector<list<int>> graph;
+ unordered_set<int>visited;
+ int v;
+ void addedge(int s,int d,bool bi=true)
+ {
+     graph[s].push_back(d);
+     if(bi)
+     {
+         graph[d].push_back(s);
+     }
+ }
+ void dfs(int curr,unordered_set<int>& visited)
+ {
+     visited.insert(curr);
+     for(auto neighbour:graph[curr])
+     {
+         if(!visited.count(neighbour))
+         {
+             dfs(neighbour,visited);
+         }
+     }
+ }
+ int cc()
+ {
+     int result=0;
+     unordered_set<int>visited;
+     for(int i=0;i<graph.size();i++)
+     {
+         if(!visited.count(i))
+         {
+         result++;
+         dfs(i,visited);
+         }
+     }
+     return result;
+ }
+ 
+int main() {
+    cout<<"enter the no of vertex  :";
+    cin>>v;
+    graph.resize(v,list<int>());
+    int e;
+    cout<<"enter the no of edge :";
+    cin>>e;
+    while(e--)
+    {
+        int s,d;
+        cout<<"enter the value of s and d :";
+        cin>>s>>d;
+        addedge(s,d,false);
+    }
+    cout<<cc();
+
+    return 0;
+}
